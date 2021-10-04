@@ -15,7 +15,7 @@ A new Flutter plugin.
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'LiveChatFlutterNew', '~> 2.0.21'
+  s.dependency 'LiveChatFlutterNew', '~> 2.0.22'
   s.platform = :ios, '8.0'
 
   # Flutter.framework does not contain a i386 slice.
