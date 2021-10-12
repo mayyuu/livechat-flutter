@@ -25,6 +25,9 @@ import com.livechatinc.inappchat.ChatWindowErrorType;
 import com.livechatinc.inappchat.ChatWindowView;
 import com.livechatinc.inappchat.models.NewMessageModel;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /** FlutterLiveChatPlugin */
 public class FlutterLiveChatPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware  {
@@ -72,6 +75,7 @@ public class FlutterLiveChatPlugin implements FlutterPlugin, MethodCallHandler, 
       final String groupId = call.argument("groupId");
       final String visitorName = call.argument("visitorName");
       final String visitorEmail = call.argument("visitorEmail");
+      final HashMap<String,String> customParams=call.argument("customParams");
 
       if (licenseNo.trim().equalsIgnoreCase("")) {
         result.error("LICENSE NUMBER EMPTY", null, null);
@@ -84,6 +88,9 @@ public class FlutterLiveChatPlugin implements FlutterPlugin, MethodCallHandler, 
         Bundle config = new ChatWindowConfiguration.Builder()
                 .setLicenceNumber(licenseNo)
                 .setGroupId(groupId)
+                .setVisitorEmail(visitorEmail)
+                .setVisitorName(visitorName)
+                .setCustomParams(customParams)
                 .build()
                 .asBundle();
         intent.putExtra(com.livechatinc.inappchat.ChatWindowConfiguration.KEY_GROUP_ID, licenseNo);

@@ -21,6 +21,7 @@ public class SwiftFlutterLiveChatPlugin: NSObject, FlutterPlugin {
             let groupId = (arguments["groupId"] as? String)
             let visitorName = (arguments["visitorName"] as? String)
             let visitorEmail = (arguments["visitorEmail"] as? String)
+            let customParams = (arguments["customParams"] as? [String:String])
 
             if (licenseNo == ""){
                 result(FlutterError(code: "", message: "LICENSE NUMBER EMPTY", details: nil))
@@ -33,7 +34,7 @@ public class SwiftFlutterLiveChatPlugin: NSObject, FlutterPlugin {
                 LiveChat.groupId = groupId // Optionally, You can route your customers to specific group of agents by providing groupId
                 LiveChat.name = visitorName // You can provide customer name or email if they are known, so a customer will not need to fill out the pre-chat survey:
                 LiveChat.email = visitorEmail // You can provide customer name or email if they are known, so a customer will not need to fill out the pre-chat survey:
-
+                LiveChat.customVariables = customParams
                 LiveChat.presentChat()
                 result(nil)
             }
