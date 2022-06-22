@@ -22,4 +22,9 @@ class FlutterLiveChatPlugin {
       'customParams': customParams,
     });
   }
+
+  /// clear chat by invoking method channel
+  static Future<void> clearChatSession() async {
+    await _channel.invokeMethod('clearSession');
+  }
 }

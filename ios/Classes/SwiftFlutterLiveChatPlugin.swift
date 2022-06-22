@@ -38,6 +38,9 @@ public class SwiftFlutterLiveChatPlugin: NSObject, FlutterPlugin {
                 LiveChat.presentChat()
                 result(nil)
             }
+        case "clearSession":
+               LiveChat.clearSession()
+               result(nil)
         default:
             result(FlutterMethodNotImplemented)
     }
