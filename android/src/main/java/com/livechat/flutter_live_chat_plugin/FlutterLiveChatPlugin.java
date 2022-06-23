@@ -1,6 +1,10 @@
 package com.livechat.flutter_live_chat_plugin;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
+import android.webkit.WebStorage;
 import android.widget.Toast;
 import android.app.Activity;
 import android.content.Context;
@@ -102,8 +106,27 @@ public class FlutterLiveChatPlugin implements FlutterPlugin, MethodCallHandler, 
 
         result.success(null);
       }
+    }else if(call.method.equals("clearSession")){
+               clearSession(context);
+               result.success(null);
     } else {
       result.notImplemented();
+    }
+  }
+
+  public static void clearSession(Context context) {
+    WebStorage.getInstance().deleteAllData();
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+      CookieManager.getInstance().removeAllCookies(null);
+      CookieManager.getInstance().flush();
+    } else {
+      CookieSyncManager cookieSyncMngr = CookieSyncManager.createInstance(context);
+      cookieSyncMngr.startSync();
+      CookieManager cookieManager = CookieManager.getInstance();
+      cookieManager.removeAllCookie();
+      cookieManager.removeSessionCookie();
+      cookieSyncMngr.stopSync();
+      cookieSyncMngr.sync();
     }
   }
 
